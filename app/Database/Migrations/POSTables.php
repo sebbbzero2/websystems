@@ -52,6 +52,11 @@ class POSTables extends Migration
             'created_at' => [
                 'type' => 'DATETIME',
             ],
+            'avatar' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('username');
