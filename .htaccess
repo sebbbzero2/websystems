@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /
+
+# Send all requests to the public folder while preserving the URL path
+RewriteCond %{REQUEST_URI} !^/public/ [NC]
+RewriteRule ^(.*)$ public/$1 [L,QSA]
+
+# Default index file
+DirectoryIndex index.php
