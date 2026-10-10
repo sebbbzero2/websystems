@@ -1,7 +1,13 @@
 RewriteEngine On
 RewriteBase /
 
-# Send all requests to the public folder while preserving the URL path
+# If the request is for a real file or directory inside public/, serve it directly
+RewriteCond %{REQUEST_URI} !^/public/ [NC]
+RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -d
+RewriteRule ^(.*)$ public/$1 [L,QSA]
+
+# Send all other requests to the public folder (for CI4 routing)
 RewriteCond %{REQUEST_URI} !^/public/ [NC]
 RewriteRule ^(.*)$ public/$1 [L,QSA]
 
